@@ -61,8 +61,16 @@ if (result.isError) {
   const body = JSON.parse(text);
   const data = body.data;
   console.log(`${TOOL} answered in ${seconds}s`);
-  console.log(Array.isArray(data) ? `${data.length} items` : "one object");
-  console.log(JSON.stringify(Array.isArray(data) ? data[0] : data, null, 2).slice(0, 1200));
+
+  if (Array.isArray(data)) {
+    console.log(`${data.length} items`);
+    // An empty list is a real answer, not a crash: the lists are
+    // filtered, so a quiet minute returns nothing.
+    if (data.length === 0) console.log("(nothing in the list right now)");
+    else console.log(JSON.stringify(data[0], null, 2).slice(0, 1200));
+  } else {
+    console.log(JSON.stringify(data ?? body, null, 2).slice(0, 1200));
+  }
 }
 
 await client.close();
