@@ -100,6 +100,17 @@ Spend less: start with one `scan_token`, and stop if its ratings already answer
 the question. `fields` trims a snapshot at the same price. Deployer history
 changes slowly, so cache it.
 
+## Remote endpoint
+
+The same tools are served remotely at `https://api.cookin.fun/mcp`, with
+nothing to install. Point an MCP host at that URL. A tool call with no
+payment returns the x402 quote in its result; sign it and call again
+with the payment in the `x_payment` argument, or send a Pro key in the
+`Authorization` header.
+
+Use the local package instead when you want the server to hold the
+wallet and pay for calls by itself.
+
 ## Reference
 
 - Field-by-field reference: [api.cookin.fun/skill.md](https://api.cookin.fun/skill.md)
