@@ -1,6 +1,7 @@
 {
   "name": "@cookinfun/mcp",
-  "version": "0.1.0",
+  "version": "0.1.1",
+  "mcpName": "io.github.cookinfun/cookin-mcp",
   "description": "MCP server for the Cookin API: Solana and Pump.fun token intelligence, paid per call in USDC over x402 or with a Pro API key.",
   "license": "MIT",
   "author": "cookin.fun",
@@ -21,10 +22,18 @@
     "agents"
   ],
   "type": "module",
-  "engines": { "node": ">=20" },
-  "bin": { "cookin-mcp": "./dist/index.js" },
+  "engines": {
+    "node": ">=20"
+  },
+  "bin": {
+    "cookin-mcp": "./dist/index.js"
+  },
   "main": "./dist/index.js",
-  "files": ["dist", "README.md", "LICENSE"],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsc",
     "test": "tsx --test test/*.test.ts",

@@ -1,0 +1,41 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.cookinfun/cookin-mcp",
+  "description": "Solana and Pump.fun token intelligence: coordinated wallets (bundles), holder quality, KOL positions, wallet reputation, deployer history, with a rating per metric. Paid per call in USDC over x402, or with a Cookin Pro key.",
+  "repository": {
+    "url": "https://github.com/cookinfun/cookin-mcp",
+    "source": "github"
+  },
+  "version": "0.1.1",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "@cookinfun/mcp",
+      "version": "0.1.1",
+      "transport": { "type": "stdio" },
+      "environmentVariables": [
+        {
+          "name": "SOLANA_KEY",
+          "description": "Base58 Solana keypair holding USDC, to pay per call with x402. The key stays on this machine; only a signed transaction leaves it.",
+          "isRequired": false,
+          "isSecret": true,
+          "format": "string"
+        },
+        {
+          "name": "COOKIN_API_KEY",
+          "description": "Cookin Pro API key, as an alternative to paying per call. Mint one at https://cookin.fun/account/api-keys",
+          "isRequired": false,
+          "isSecret": true,
+          "format": "string"
+        },
+        {
+          "name": "COOKIN_MAX_PAYMENT",
+          "description": "Most one call may pay, for example $0.05. Default $0.05.",
+          "isRequired": false,
+          "isSecret": false,
+          "format": "string"
+        }
+      ]
+    }
+  ]
+}

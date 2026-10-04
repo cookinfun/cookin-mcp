@@ -115,4 +115,17 @@ npm run build     # tsc to dist/
 npm start         # run the server over stdio
 ```
 
+### Releasing
+
+`package.json` and `server.json` both carry the version, and the MCP
+Registry rejects a mismatch. Bump both, publish to npm first (the
+registry reads `mcpName` from the published package), then publish the
+metadata:
+
+```bash
+npm publish --access public
+mcp-publisher login github
+mcp-publisher publish
+```
+
 MIT
