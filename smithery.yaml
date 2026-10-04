@@ -1,0 +1,38 @@
+# Smithery configuration file: https://smithery.ai/docs/config#smitheryyaml
+#
+# Both credentials are optional: with neither, every tool answers 402
+# and says how to pay, which is a usable first run. `solanaKey` pays per
+# call with x402; `cookinApiKey` uses a Cookin Pro subscription instead.
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    properties:
+      solanaKey:
+        type: string
+        description: >-
+          Base58 Solana keypair holding USDC, to pay per call with x402.
+          The key stays on the machine running this server; only a signed
+          transaction leaves it. Use a dedicated hot wallet.
+      cookinApiKey:
+        type: string
+        description: >-
+          Cookin Pro API key, as an alternative to paying per call. Mint
+          one at https://cookin.fun/account/api-keys
+      maxPayment:
+        type: string
+        description: Most one call may pay, for example $0.05. Defaults to $0.05.
+  commandFunction:
+    |-
+    config => ({
+      command: 'node',
+      args: ['dist/index.js'],
+      env: {
+        ...(config.solanaKey ? { SOLANA_KEY: config.solanaKey } : {}),
+        ...(config.cookinApiKey ? { COOKIN_API_KEY: config.cookinApiKey } : {}),
+        ...(config.maxPayment ? { COOKIN_MAX_PAYMENT: config.maxPayment } : {})
+      }
+    })
+  exampleConfig:
+    solanaKey: 4NMwx...base58keypair
+    maxPayment: $0.05
